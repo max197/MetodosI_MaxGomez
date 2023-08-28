@@ -1,1 +1,1 @@
-Repositorio para entregas de Metodos Computacionales I
+Repositorio para entregas de los parciales de Metodos Computacionales I
