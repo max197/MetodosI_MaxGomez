@@ -39,7 +39,7 @@ class Simpson(Integrator):
         midpoint = 0.5*(self.x[0]+self.x[-1])
         
         f_midpoint = self.f(midpoint)
-        self.Integral =self.y[0]+ f_midpoint +self.y[-1]
+        self.Integral =self.y[0]+ 4*f_midpoint +self.y[-1]
         
         return self.Integral*(self.h/3)
     
