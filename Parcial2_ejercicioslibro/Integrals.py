@@ -38,11 +38,10 @@ class Simpson(Integrator):
         '''Calcula la integral con el metodo de Simpson 1/3 (simple)'''
         midpoint = 0.5*(self.x[0]+self.x[-1])
         
-        self.Integral = 0
         f_midpoint = self.f(midpoint)
-        self.Integral +=self.y[0]+ f_midpoint +self.y[-1]
+        self.Integral =self.y[0]+ f_midpoint +self.y[-1]
         
-        return self.Integral*self.h/3
+        return self.Integral*(self.h/3)
     
     def GetSimpleError(self):
         '''Calcula el error asociado a Simpson 1/3 (simple)'''
@@ -50,10 +49,8 @@ class Simpson(Integrator):
         #print(f"antes de quitar nans {d}")
         d = d[~np.isnan(d)]
         #print(f"despues de quitar nans {d}")
-        
         max_ = np.max(np.abs(d))
-        
-        self.error = self.h**5*max_/90
+        self.error = (max_*self.h**5)/90
         
         return self.error
         
