@@ -2,6 +2,8 @@ from funciones import GetNewton
 import numpy as np 
 import sympy as sym
 
+'''En este modulo se encuentran las cuadraturas de Laguerre y Hermite'''
+
 x = sym.Symbol('x',real=True)
 
 def GetLaguerre(n,x):
