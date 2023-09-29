@@ -23,6 +23,7 @@ def GetNewton(f,df,xn,itmax=10000,precision=1e-14):
         it += 1
         
     if it == itmax:
+        print("itmax reached")
         return False
     else:
         return xn
