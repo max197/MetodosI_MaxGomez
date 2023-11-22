@@ -2,7 +2,7 @@ import numpy as np
 
 class Robot:
     
-    def __init__(self, dt, Layers, Id=0):
+    def __init__(self, dt, Layers, Id=0,overfitPenalty = 0.8):
         
         self.Id = Id
         self.dt = dt
@@ -17,6 +17,7 @@ class Robot:
 
         # Capacidad o aptitud del individuo
         self.Fitness = np.inf
+        self.overfitPenalty = overfitPenalty
         
         #Steps controla que tanto avanza el robot en la region de interes.
         #Durante el movimiento el robot aumenta el valor de esta variable en una unidad si
@@ -35,7 +36,6 @@ class Robot:
         #Si -1<= x <=1 incrementamos el numero de pasos en 1
         if self.r[0]<=1 and self.r[0]>=-1:
             self.Steps += 1
-        print(self.Steps)
 
     # Cada generación regresamos el robot al origin
     # Y volvemos a estimar su fitness
@@ -64,7 +64,9 @@ class Robot:
     
         # Cambiamos el vector velocidad
         if self.Activation[0] > threshold:
+            #penalización de 0.8
             self.v = -self.v
+            self.Steps = self.overfitPenalty*self.Steps
             
             # Deberias penalizar de alguna forma, dado que mucha activación es desgastante!
             # Para cualquier cerebro
