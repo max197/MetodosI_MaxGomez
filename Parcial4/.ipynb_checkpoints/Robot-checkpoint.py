@@ -2,7 +2,7 @@ import numpy as np
 
 class Robot:
     
-    def __init__(self, dt, Layers, Id=0,overfitPenalty = 0.8):
+    def __init__(self, dt, Layers, Id=0,overfitPenalty = 0.5):
         
         self.Id = Id
         self.dt = dt
