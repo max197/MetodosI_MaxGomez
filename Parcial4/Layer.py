@@ -3,7 +3,7 @@ import numpy as np
 class Layer:
     
     
-    def __init__(self,NC,NN,ActFun,rate=0.001): # Jugar con la tasa de mutacion
+    def __init__(self,NC,NN,ActFun,rate=0.05): # Jugar con la tasa de mutacion
         
         self.NC = NC
         self.NN = NN

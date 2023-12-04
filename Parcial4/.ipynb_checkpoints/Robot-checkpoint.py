@@ -2,7 +2,7 @@ import numpy as np
 
 class Robot:
     
-    def __init__(self, dt, Layers, Id=0,overfitPenalty = 0.5):
+    def __init__(self, dt, Layers, Id=0,overfitPenalty = 0.05):
         
         self.Id = Id
         self.dt = dt
@@ -32,11 +32,13 @@ class Robot:
     
     def Evolution(self):
         self.r += self.v*self.dt 
-        
-        #Si -1<= x <=1 incrementamos el numero de pasos en 1
-        if self.r[0]<=1 and self.r[0]>=-1:
+        #Si -1+epsilon<= x <=1-epsilon incrementamos el numero de pasos en 1
+        epsilon = 0.5
+        if self.r[0]<=1-epsilon and self.r[0]>=-1+epsilon:
             self.Steps += 1
 
+        if self.r[0]>1 or self.r[0]<-1:
+            self.Steps= 0
     # Cada generación regresamos el robot al origin
     # Y volvemos a estimar su fitness
     def Reset(self):
@@ -46,8 +48,8 @@ class Robot:
         
     # Aca debes definir que es mejorar en tu proceso evolutivo
     def SetFitness(self):
-        if self.Steps== 0:
-            self.Fitness = 0 
+        if self.Steps<= 0:
+            self.Fitness = np.inf
         else:
             self.Fitness = 1/self.Steps
         
@@ -64,12 +66,13 @@ class Robot:
     
         # Cambiamos el vector velocidad
         if self.Activation[0] > threshold:
-            #penalización de 0.8
             self.v = -self.v
-            self.Steps = self.overfitPenalty*self.Steps
             
             # Deberias penalizar de alguna forma, dado que mucha activación es desgastante!
-            # Para cualquier cerebro
+            #penalizacion
+            self.Steps = self.overfitPenalty*self.Steps
+            
+
     
         return self.Activation
     
